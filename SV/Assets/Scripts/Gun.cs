@@ -1,10 +1,11 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Gun : MonoBehaviour
 {
 
-    //public UiManager uiManager;
+    public UiManager uiManager;
     public enum State
     {
         Ready,
@@ -78,7 +79,7 @@ public class Gun : MonoBehaviour
 
     public void Fire()
     {
-        if (Time.time >= lastFireTime + gunData.fireRate)
+        if (Time.time >= lastFireTime + gunData.fireRate && Time.timeScale != 0f)
         {
             lastFireTime = Time.time;
             Shoot();
@@ -190,7 +191,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator ShotEffect(Vector3 hitPos)
     {
-        //audioSource.PlayOneShot(gunData.shootSound);
+        audioSource.PlayOneShot(gunData.shootSound, AudioManager.instance.sfxVolume);
 
         muzzleFlash.Play();
         audioSource.Play();

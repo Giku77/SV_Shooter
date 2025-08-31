@@ -73,7 +73,7 @@ public class PlayerHealth : LivingEntity
         healthSlider.value = Health / MaxHealth;
         if (audioSource != null && hitClip != null)
         {
-            audioSource.PlayOneShot(hitClip);
+            audioSource.PlayOneShot(hitClip, AudioManager.instance.sfxVolume);
         }
     }
 
@@ -100,7 +100,7 @@ public class PlayerHealth : LivingEntity
         }
         if (audioSource != null && deathClip != null)
         {
-            audioSource.PlayOneShot(deathClip);
+            audioSource.PlayOneShot(deathClip, AudioManager.instance.sfxVolume);
         }
         playerMovement.enabled = false;
         playerShoot.enabled = false;

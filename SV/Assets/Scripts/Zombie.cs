@@ -22,6 +22,9 @@ public class Zombie : LivingEntity
         Heavy
     }
 
+    private static readonly int hashDie = Animator.StringToHash("Die");
+    private static readonly int hashTarget = Animator.StringToHash("HasTarget");
+
     private State currentState;
 
     private Transform target;
@@ -57,19 +60,19 @@ public class Zombie : LivingEntity
             switch (currentState)
             {
                 case State.Idle:
-                    animator.SetBool("HasTarget", false);
+                    animator.SetBool(hashTarget, false);
                     navMeshAgent.isStopped = true;
                     break;
                 case State.Trace:
-                    animator.SetBool("HasTarget", true);
+                    animator.SetBool(hashTarget, true);
                     navMeshAgent.isStopped = false;
                     break;
                 case State.Attack:
-                    animator.SetBool("HasTarget", false);
+                    animator.SetBool(hashTarget, false);
                     navMeshAgent.isStopped = true;
                     break;
                 case State.Die:
-                    animator.SetTrigger("Die");
+                    animator.SetTrigger(hashDie);
                     navMeshAgent.isStopped = true;
                     break;
             }
@@ -112,12 +115,12 @@ public class Zombie : LivingEntity
         animator = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
-        uiManager = GameObject.FindGameObjectWithTag("Ui").GetComponent<UiManager>(); 
+        uiManager = GameObject.FindGameObjectWithTag("Ui").GetComponent<UiManager>();
     }
 
     private IEnumerator bloodEffect(Vector3 hitpos)
     {
-        audioSource.PlayOneShot(zombieHit);
+        audioSource.PlayOneShot(zombieHit, AudioManager.instance.sfxVolume);
 
         bloodE.transform.position = hitpos;
         bloodE.Play();
@@ -231,7 +234,7 @@ public class Zombie : LivingEntity
 
     protected override void Die()
     {
-        audioSource.PlayOneShot(zombieDie);
+        audioSource.PlayOneShot(zombieDie, AudioManager.instance.sfxVolume);
         base.Die();
         capsuleCollider.enabled = false;
         healthSlider.gameObject.SetActive(false);
