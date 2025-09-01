@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : LivingEntity
 {
     private int hashDie = Animator.StringToHash("Die");
-    public Slider healthSlider;
+    //public Slider healthSlider;
 
     public AudioClip deathClip;
     public AudioClip hitClip;
@@ -32,10 +32,10 @@ public class PlayerHealth : LivingEntity
     {
         base.OnEnable();
         Debug.Log("Player Health onEnable");
-        healthSlider.gameObject.SetActive(true);
+        //healthSlider.gameObject.SetActive(true);
         //healthSlider.maxValue = MaxHealth;
         //healthSlider.value = Health;
-        healthSlider.value = Health / MaxHealth;
+        //healthSlider.value = Health / MaxHealth;
         playerMovement.enabled = true;
         playerShoot.enabled = true;
     }
@@ -57,7 +57,7 @@ public class PlayerHealth : LivingEntity
             Health = MaxHealth;
         }
         //healthSlider.value = Health;
-        healthSlider.value = Health / MaxHealth;
+        //healthSlider.value = Health / MaxHealth;
         //if (audioSource != null && itemPickuoClip != null)
         //{
         //    audioSource.PlayOneShot(itemPickuoClip);
@@ -70,7 +70,7 @@ public class PlayerHealth : LivingEntity
         base.TakeDamage(damage, hitPoint, hitNormal);
         StartCoroutine(hitEffect());
         //healthSlider.value = Health;
-        healthSlider.value = Health / MaxHealth;
+        //healthSlider.value = Health / MaxHealth;
         if (audioSource != null && hitClip != null)
         {
             audioSource.PlayOneShot(hitClip, AudioManager.instance.sfxVolume);
@@ -93,7 +93,7 @@ public class PlayerHealth : LivingEntity
     protected override void Die()
     {
         base.Die();
-        healthSlider.gameObject.SetActive(false);
+        //healthSlider.gameObject.SetActive(false);
         if (animator != null)
         {
             animator.SetTrigger(hashDie);

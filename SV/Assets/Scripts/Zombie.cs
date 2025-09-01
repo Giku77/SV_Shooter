@@ -46,7 +46,7 @@ public class Zombie : LivingEntity
     private NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
     private AudioSource audioSource;
-    public Slider healthSlider;
+    //public Slider healthSlider;
 
     private bool sinking = false;
 
@@ -212,7 +212,7 @@ public class Zombie : LivingEntity
     public override void TakeDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
     {
         base.TakeDamage(damage, hitPoint, hitNormal);
-        healthSlider.value = Health / MaxHealth;
+        //healthSlider.value = Health / MaxHealth;
 
         StartCoroutine(bloodEffect(hitPoint));
     }
@@ -237,7 +237,7 @@ public class Zombie : LivingEntity
         audioSource.PlayOneShot(zombieDie, AudioManager.instance.sfxVolume);
         base.Die();
         capsuleCollider.enabled = false;
-        healthSlider.gameObject.SetActive(false);
+        //healthSlider.gameObject.SetActive(false);
         //Destroy(healthSlider);
         //Destroy(capsuleCollider);
         state = State.Die;

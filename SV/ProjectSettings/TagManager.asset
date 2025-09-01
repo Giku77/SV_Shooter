@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ui
   - FireLight
+  - HealthBar
   layers:
   - Default
   - TransparentFX

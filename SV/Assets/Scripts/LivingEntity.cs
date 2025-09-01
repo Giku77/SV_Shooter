@@ -7,6 +7,8 @@ public class LivingEntity : MonoBehaviour, IDamagable
     public float Health { get; protected set; }
     public bool Isdead { get; protected set; }
 
+    public event Action OnDmg;
+
     public event Action OnDeath;
 
     protected virtual void OnEnable()
@@ -22,6 +24,10 @@ public class LivingEntity : MonoBehaviour, IDamagable
         if (Health <= 0 && !Isdead)
         {
             Die();
+        }
+        if (OnDmg != null)
+        {
+            OnDmg();
         }
     }
 
